@@ -6,7 +6,7 @@ function App() {
   const paraimgurl = searchParams.get("url");
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="h-full md:h-[40vh] w-full md:w-[30vw]">
+      <div className="h-full lg:h-[40vh] w-full lg:w-[30vw]">
         <Player imgurl={paraimgurl} />
       </div>
     </div>

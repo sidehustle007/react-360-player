@@ -8,7 +8,7 @@ import {
 } from "@enra-gmbh/panolens";
 import panoimage from "../assets/image1.jpeg";
 
-export default function PanoCont({ imgurl, mode, sensor }) {
+export default function PanoCont({ imgurl, mode, sensor, setProgress }) {
   const containerRef = useRef(null);
   const panorama = useRef(null);
   const viewer = useRef(null);
@@ -38,6 +38,11 @@ export default function PanoCont({ imgurl, mode, sensor }) {
     });
     viewer.current.add(panorama.current);
     viewer.current.enableControl(0);
+
+    panorama.current.addEventListener("progress", function (e) {
+      console.log("pregres >>>>>>: ", e.progress);
+      setProgress(e.progress);
+    });
   }, []);
 
   useEffect(() => {
