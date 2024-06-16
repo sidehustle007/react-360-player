@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import PlayerButtons, { LockBtn, MapBtn } from "./playerButtons";
+import PlayerButtons, { LockBtn, MapnGalleryBtn } from "./playerButtons";
 import PanoCont from "./panoCont";
 import ProgressBar from "./progressBar";
+import Gallery from "./gallery";
 
 export default function Player({ imgurl }) {
   const containerParentRef = useRef(null);
@@ -10,6 +11,8 @@ export default function Player({ imgurl }) {
   const [sensor, setSensor] = useState(false);
   const [lock, setLock] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [showgallery, setShowGallery] = useState(false);
+  const [galleryUrl, setGalleryUrl] = useState(null);
 
   const handleFullScreen = () => {
     if (!document.fullscreenElement) {
@@ -29,15 +32,20 @@ export default function Player({ imgurl }) {
     setSensor(!sensor);
   };
 
+  useEffect(() => {
+    galleryUrl && setShowGallery(false);
+  }, [galleryUrl]);
+
   return (
     <div
       ref={containerParentRef}
       className="bg-black w-full overflow-hidden h-full relative flex justify-center items-center"
     >
       <PanoCont
-        imgurl={imgurl}
+        imgurl={galleryUrl ? galleryUrl : imgurl}
         mode={mode}
         sensor={sensor}
+        key={galleryUrl}
         setProgress={setProgress}
       />
       <PlayerButtons
@@ -51,7 +59,12 @@ export default function Player({ imgurl }) {
       />
 
       <LockBtn lock={lock} setLock={setLock} />
-      <MapBtn lock={lock} />
+      <MapnGalleryBtn
+        lock={lock}
+        setShowGallery={setShowGallery}
+        showgallery={showgallery}
+      />
+      {showgallery && <Gallery setGalleryUrl={setGalleryUrl} />}
       <ProgressBar progress={progress?.loaded / progress?.total} />
     </div>
   );

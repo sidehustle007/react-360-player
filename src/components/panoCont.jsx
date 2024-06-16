@@ -40,7 +40,6 @@ export default function PanoCont({ imgurl, mode, sensor, setProgress }) {
     viewer.current.enableControl(0);
 
     panorama.current.addEventListener("progress", function (e) {
-      console.log("pregres >>>>>>: ", e.progress);
       setProgress(e.progress);
     });
   }, []);

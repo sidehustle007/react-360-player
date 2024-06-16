@@ -77,7 +77,7 @@ export function LockBtn({ lock, setLock }) {
   );
 }
 
-export function MapBtn({ lock }) {
+export function MapnGalleryBtn({ lock, setShowGallery, showgallery }) {
   const size = 25;
   const color = "white";
 
@@ -91,7 +91,7 @@ export function MapBtn({ lock }) {
         <FaMap size={size} color={color} />
       </button>
 
-      <button>
+      <button onClick={() => setShowGallery(!showgallery)}>
         <LuGalleryVerticalEnd size={size} color={color} />
       </button>
     </div>
