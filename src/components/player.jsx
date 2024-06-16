@@ -3,6 +3,8 @@ import PlayerButtons, { LockBtn, MapnGalleryBtn } from "./playerButtons";
 import PanoCont from "./panoCont";
 import ProgressBar from "./progressBar";
 import Gallery from "./gallery";
+import PanoImg from "../constant/data";
+import Sudden from "./sudden";
 
 export default function Player({ imgurl }) {
   const containerParentRef = useRef(null);
@@ -13,6 +15,7 @@ export default function Player({ imgurl }) {
   const [progress, setProgress] = useState(0);
   const [showgallery, setShowGallery] = useState(false);
   const [galleryUrl, setGalleryUrl] = useState(null);
+  const [seleNum, setSeleNum] = useState(null);
 
   const handleFullScreen = () => {
     if (!document.fullscreenElement) {
@@ -35,6 +38,12 @@ export default function Player({ imgurl }) {
   useEffect(() => {
     galleryUrl && setShowGallery(false);
   }, [galleryUrl]);
+
+  const randSelect = () => {
+    const randnum = Math.floor(Math.random() * 13);
+    setGalleryUrl(PanoImg[randnum]?.imageLink);
+    setSeleNum(randnum);
+  };
 
   return (
     <div
@@ -63,9 +72,11 @@ export default function Player({ imgurl }) {
         lock={lock}
         setShowGallery={setShowGallery}
         showgallery={showgallery}
+        randSelect={randSelect}
       />
       {showgallery && <Gallery setGalleryUrl={setGalleryUrl} />}
       <ProgressBar progress={progress?.loaded / progress?.total} />
+      <Sudden seleNum={seleNum} />
     </div>
   );
 }
