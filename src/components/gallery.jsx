@@ -6,12 +6,15 @@ export default function Gallery({ setGalleryUrl }) {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
         {PanoImg.map(({ imageLink }, index) => (
           <button key={index} onClick={() => setGalleryUrl(imageLink)}>
-            <img
+            {/* <img
               className="h-40 w-full bg-white max-w-full rounded-lg object-cover object-center"
               src={imageLink}
               alt="gallery-photo"
               loading="lazy"
-            />
+            /> */}
+            <div className="h-40 w-40 bg-white max-w-full flex justify-center items-center rounded-lg object-cover object-center">
+              {index + 1}
+            </div>
           </button>
         ))}
       </div>
