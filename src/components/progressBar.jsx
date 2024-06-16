@@ -7,7 +7,7 @@ export default function ProgressBar({ progress }) {
     <div
       className={`transition-opacity ease-in duration-700 ${
         progress === 1 ? "opacity-0" : "opacity-100"
-      } absolute top-[10px] px-2 py-1 flex justify-center items-center left-[10px] bg-white/20`}
+      } absolute top-[10px] px-2 py-1 flex rounded-md justify-center items-center left-[10px] bg-white/20`}
     >
       <div className={`text-white`}>{(progress * 100).toFixed(0)}%</div>
     </div>
