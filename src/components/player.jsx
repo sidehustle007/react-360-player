@@ -90,7 +90,7 @@ export default function Player({ imgurl }) {
       <ProgressBar progress={progress?.loaded / progress?.total} />
       {/* <Sudden seleNum={seleNum} /> */}
       <SideViewOnPlayer show={!lock && showGeoMap}>
-        <Iframe src={"http://maps.google.com/maps?q=1888&output=embed"} />
+        <Iframe src={"https://maps.google.com/maps?q=1888&output=embed"} />
       </SideViewOnPlayer>
       <SideViewOnPlayer show={!lock && showgallery}>
         <Gallery setGalleryUrl={setGalleryUrl} />
