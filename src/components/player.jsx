@@ -5,6 +5,10 @@ import ProgressBar from "./progressBar";
 import Gallery from "./gallery";
 import PanoImg from "../constant/data";
 import Sudden from "./sudden";
+import SideViewOnPlayer from "./sideviewonplayer";
+import Iframe from "./iframe";
+
+import panoimage from "../assets/image1.jpeg";
 
 export default function Player({ imgurl }) {
   const containerParentRef = useRef(null);
@@ -16,6 +20,7 @@ export default function Player({ imgurl }) {
   const [showgallery, setShowGallery] = useState(false);
   const [galleryUrl, setGalleryUrl] = useState(null);
   const [seleNum, setSeleNum] = useState(null);
+  const [showGeoMap, setShowGeoMap] = useState(false);
 
   const handleFullScreen = () => {
     if (!document.fullscreenElement) {
@@ -35,9 +40,9 @@ export default function Player({ imgurl }) {
     setSensor(!sensor);
   };
 
-  useEffect(() => {
-    galleryUrl && setShowGallery(false);
-  }, [galleryUrl]);
+  // useEffect(() => {
+  //   galleryUrl && setShowGallery(false);
+  // }, [galleryUrl]);
 
   const randSelect = () => {
     const randnum = Math.floor(Math.random() * 13);
@@ -57,6 +62,12 @@ export default function Player({ imgurl }) {
         key={galleryUrl}
         setProgress={setProgress}
       />
+      {/* 
+      <img
+        src={galleryUrl ? galleryUrl : panoimage}
+        className="w-full h-full"
+        alt=""
+      /> */}
       <PlayerButtons
         handleSensor={handleSensor}
         setModeType={setModeType}
@@ -72,11 +83,18 @@ export default function Player({ imgurl }) {
         lock={lock}
         setShowGallery={setShowGallery}
         showgallery={showgallery}
-        randSelect={randSelect}
+        // randSelect={randSelect}
+        showmap={() => setShowGeoMap(!showGeoMap)}
       />
-      {showgallery && <Gallery setGalleryUrl={setGalleryUrl} />}
+
       <ProgressBar progress={progress?.loaded / progress?.total} />
-      <Sudden seleNum={seleNum} />
+      {/* <Sudden seleNum={seleNum} /> */}
+      <SideViewOnPlayer show={!lock && showGeoMap}>
+        <Iframe src={"http://maps.google.com/maps?q=1888&output=embed"} />
+      </SideViewOnPlayer>
+      <SideViewOnPlayer show={!lock && showgallery}>
+        <Gallery setGalleryUrl={setGalleryUrl} />
+      </SideViewOnPlayer>
     </div>
   );
 }

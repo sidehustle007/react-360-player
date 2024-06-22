@@ -77,12 +77,7 @@ export function LockBtn({ lock, setLock }) {
   );
 }
 
-export function MapnGalleryBtn({
-  lock,
-  setShowGallery,
-  showgallery,
-  randSelect,
-}) {
+export function MapnGalleryBtn({ lock, setShowGallery, showgallery, showmap }) {
   const size = 25;
   const color = "white";
 
@@ -92,7 +87,7 @@ export function MapnGalleryBtn({
     <div
       className={`absolute transition-transform duration-500 ${btnHideANi} bottom-[10px] left-[10px] flex justify-around rounded-md items-center w-auto px-4 py-2 gap-6 bg-white/20`}
     >
-      <button onClick={randSelect}>
+      <button onClick={showmap}>
         <FaMap size={size} color={color} />
       </button>
 

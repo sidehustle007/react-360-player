@@ -1,7 +1,9 @@
 import React from "react";
 
 export default function ProgressBar({ progress }) {
-  console.log("progress >>> >>", progress);
+  //console.log("progress >>> >>", progress);
+
+  if (!progress) return null;
 
   return (
     <div
